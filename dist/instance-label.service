@@ -1,0 +1,12 @@
+[Unit]
+Description=Sets Instance labels for ssh: and logging:.
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/cloud-compliance/cloud-label.sh
+RemainAfterExit=true
+ExecStop=/usr/local/bin/cloud-compliance/label-stop.sh
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
