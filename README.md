@@ -6,6 +6,7 @@ universal automation to all of your Public cloud instances.
 - Establish pre-requisites for you cloud provider.
 - Edit ```etc/pam.d/sshd``` to contain ```session optional pam_exec.so /usr/local/bin/cloud-compliance/cloud-compliance.py -c``` the -c argument lets
 the tool know to set the ssh kwarg to true.
+- Run ```wget https://raw.githubusercontent.com/BigCoSmallCo/cloud_compliance/master/deploy.sh```
 - ```chmod +x deploy.sh``` to make it executable.
 - Run ```sudo ./delpoy.sh```.
 

@@ -32,9 +32,14 @@ def get_instance_data(service, project, zone, instance):
 
 def set_labels(service, project, zone, instance, first_run=False, ssh=False):
     data = get_instance_data(service, project, zone, instance)
-    request_body = {
-            'labelFingerprint' : data['labelFingerprint'],
-            'labels' : data['labels']}
+    if 'label' in data.keys():
+        request_body = {
+                'labelFingerprint' : data['labelFingerprint'],
+                'labels' : data['labels']}
+    else:
+        request_body = {
+                'labelFingerprint' : data['labelFingerprint'],
+                'labels' : {}}
     if first_run:
         ssh_key = "ssh"
         if ssh_key in request_body['labels']:
@@ -69,9 +74,9 @@ def check_operation(service, project, zone, instance, operation):
 
 def main():
     # Define and parse command line arguments
-    parser = argparse.ArgumentParser(description="My simple Python service")
-    parser.add_argument("-s", "--startup", help="set initial labels and keys on instance.")
-    parser.add_argument("-c", "--compr", help="set instance label to compromised")
+    parser = argparse.ArgumentParser(description="")
+    parser.add_argument("-s", "--startup", action="store_true", help="set initial labels and keys on instance.")
+    parser.add_argument("-c", "--compr", action="store_true", help="set instance label to compromised")
     args = parser.parse_args()
     #gcp auth.
     credentials = GoogleCredentials.get_application_default()

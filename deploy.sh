@@ -6,8 +6,15 @@ DIR=/usr/local/bin/cloud-compliance
 #desired download location
 cd ~
 
+mkdir tmp
+cd tmp
 # wget tar file here.
+wget https://github.com/BigCoSmallCo/cloud_compliance/archive/master.tar.gz
 
+tar -xvzf master.tar.gz
+cd cloud_compliance-master
+apt install python3-pip -y
+pip3 install -r requirements.txt
 #create directory to house relevant files.
 mkdir $DIR
 
@@ -34,10 +41,7 @@ systemctl enable instance-label.service
 #cleanup
 cd ~
 echo "Cleaning up files."
-rm ./cloud-compliance.py
-rm ./label-start.sh
-rm ./labelp-stop.sh
-rm ./instance-label.service
+rm -r tmp
 
 #only useful if deploying on already running instance, not advised.
-#python3 $DIR/cloud-compliance.py -s
+python3 $DIR/cloud-compliance.py -s
