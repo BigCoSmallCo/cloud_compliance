@@ -1,22 +1,8 @@
 #!/bin/sh
 
-#edit to your needs.
-DIR=/usr/local/bin/cloud-compliance
-
-#desired download location
-cd ~
-
-mkdir tmp
-cd tmp
-# wget tar file here.
-wget https://github.com/BigCoSmallCo/cloud_compliance/archive/master.tar.gz
-
-tar -xvzf master.tar.gz
-cd cloud_compliance-master
+#Install requirements.
 apt install python3-pip -y
 pip3 install -r requirements.txt
-#create directory to house relevant files.
-mkdir $DIR
 
 #Copy files to correct locations and setting permissions.
 echo "Copying files to $DIR."
@@ -33,6 +19,9 @@ chmod +x $DIR/label-stop.sh
 chmod 755 $DIR/cloud-compliance.py
 chmod +x $DIR/cloud-compliance.py
 
+#edit pam.d
+echo session optional pam_exec.so /usr/local/bin/cloud-compliance/cloud-compliance.py -c >> /etc/pam.d/sshd
+
 #setup service
 cd /etc/systemd/system
 echo "Setting up systemctl service."
@@ -44,4 +33,4 @@ echo "Cleaning up files."
 rm -r tmp
 
 #only useful if deploying on already running instance, not advised.
-python3 $DIR/cloud-compliance.py -s
+# python3 $DIR/cloud-compliance.py -s
