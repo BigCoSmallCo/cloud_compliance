@@ -6,6 +6,9 @@ DIR=/usr/local/bin/cloud-compliance
 apt install python3-pip -y
 pip3 install -r requirements.txt
 
+#create directory to house relevant files.
+mkdir $DIR
+
 #Copy files to correct locations and setting permissions.
 echo "Copying files to $DIR."
 cp ./cloud-compliance.py $DIR
