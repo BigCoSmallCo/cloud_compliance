@@ -29,10 +29,5 @@ cd /etc/systemd/system
 echo "Setting up systemctl service."
 systemctl enable instance-label.service
 
-#cleanup
-cd ~
-echo "Cleaning up files."
-rm -r tmp
-
 #only useful if deploying on already running instance, not advised.
 # python3 $DIR/cloud-compliance.py -s
