@@ -3,7 +3,7 @@ Description=Sets Instance labels for ssh: and logging:.
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/cloud-compliance/cloud-label.sh
+ExecStart=/usr/local/bin/cloud-compliance/label-start.sh
 RemainAfterExit=true
 ExecStop=/usr/local/bin/cloud-compliance/label-stop.sh
 StandardOutput=journal
